@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    private PlayerManager pm;
+    
     public CharacterController ctrl;
     public Transform playerBody;
     public Transform camTransform;
@@ -19,6 +21,7 @@ public class PlayerInput : MonoBehaviour
     public float jmpH = 3f;
     private void Start()
     {
+        pm = GetComponent<PlayerManager>();
         Cursor.lockState = CursorLockMode.Locked;
         playerBody = GetComponent<Transform>();
         ctrl = GetComponent<CharacterController>();
@@ -26,6 +29,11 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            pm.Shoot();
+        }
+        
         float mouseX = Input.GetAxisRaw("Mouse X") * mouseSens * Time.deltaTime;
         float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSens * Time.deltaTime;
 
