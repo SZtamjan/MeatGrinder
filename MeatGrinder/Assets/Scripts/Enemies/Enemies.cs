@@ -13,6 +13,7 @@ public class Enemies : MonoBehaviour
     private float moveSpeed;
 
     private Transform target;
+    private bool isAway = true;
     
     private void Start()
     {
@@ -26,14 +27,40 @@ public class Enemies : MonoBehaviour
 
     private void Update()
     {
-        //Rotate towards player
-        Vector3 direction = target.position - transform.position;
-        direction.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(direction);
-        transform.rotation = rotation;
+        if (isAway)
+        {
+            //Rotate towards player
+            Vector3 direction = target.position - transform.position;
+            direction.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(direction);
+            transform.rotation = rotation;
         
-        //Move towards player
-        Vector3 newPos = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-        transform.position = new Vector3(newPos.x, transform.position.y, newPos.z);
+            //Move towards player
+            Vector3 newPos = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            transform.position = new Vector3(newPos.x, transform.position.y, newPos.z);
+        }
+        
+        
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.CompareTag("Player")) isAway = false;
+        
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if(other.gameObject.CompareTag("Player")) isAway = true;
+    }
+
+    public void GetDmg(float dmg)
+    {
+        hp -= dmg;
+        print("zostało mi: " + hp);
+        if (hp <= 0f)
+        {
+            Destroy(gameObject);
+        }
     }
 }

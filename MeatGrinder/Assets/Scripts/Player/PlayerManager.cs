@@ -16,9 +16,11 @@ public class PlayerManager : MonoBehaviour
     public GameObject bullet;
     public Transform bulletSpawnAt;
 
+    private Transform playerCam;
     private Vector3 newPosition;
     private void Start()
     {
+        playerCam = GetComponentInChildren<Camera>().transform;
         hp = stats.hp;
         dmg = stats.dmg;
     }
@@ -34,7 +36,7 @@ public class PlayerManager : MonoBehaviour
     public void Shoot()
     {
         GameObject currentBullet = Instantiate(bullet, bulletSpawnAt.position, Quaternion.identity);
-        newPosition = currentBullet.transform.position + transform.forward * 10f;
+        newPosition = currentBullet.transform.position + playerCam.forward * 10f;
         Bullet blt = currentBullet.GetComponent<Bullet>();
         blt.bulletSpawnAt = bulletSpawnAt;
         blt.newPosition = newPosition;

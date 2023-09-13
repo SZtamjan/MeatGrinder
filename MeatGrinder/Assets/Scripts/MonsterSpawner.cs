@@ -30,7 +30,7 @@ public class MonsterSpawner : MonoBehaviour
             float fixedY = 0.1f;
             float randomZ = Random.Range(spawnArea[0], spawnArea[1]);
             
-            //GameObject obj = Instantiate(enemy, new Vector3(randomX, fixedY, randomZ), Quaternion.identity);
+            GameObject obj = Instantiate(enemy, new Vector3(randomX, fixedY, randomZ), Quaternion.identity);
             yield return new WaitForSeconds(1f);
         }
         yield return null;

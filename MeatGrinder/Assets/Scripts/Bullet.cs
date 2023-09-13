@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -11,4 +13,12 @@ public class Bullet : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, newPosition, 20f * Time.deltaTime);
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        other.gameObject.GetComponent<DMGDealer>().DealDamage();
+        Destroy(gameObject);
+    }
+    
+    
 }
