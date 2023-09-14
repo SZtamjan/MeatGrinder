@@ -4,9 +4,9 @@ public class PlayerInput : MonoBehaviour
 {
     private PlayerManager pm;
     
-    public CharacterController ctrl;
-    public Transform playerBody;
-    public Transform camTransform;
+    private CharacterController ctrl;
+    private Transform playerBody;
+    private Transform camTransform;
 
     public float playerSpeed = 10f;
     public float mouseSens = 500f;
@@ -21,6 +21,7 @@ public class PlayerInput : MonoBehaviour
     public float jmpH = 3f;
     private void Start()
     {
+        camTransform = GetComponentInChildren<Camera>().transform;
         pm = GetComponent<PlayerManager>();
         Cursor.lockState = CursorLockMode.Locked;
         playerBody = GetComponent<Transform>();
@@ -55,7 +56,7 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && grounded)
         {
-            print("jumped");
+            //print("jumped");
             velocity.y = Mathf.Sqrt(jmpH * -2f * gravity);
         }
         

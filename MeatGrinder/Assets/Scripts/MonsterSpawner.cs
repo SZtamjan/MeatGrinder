@@ -6,8 +6,11 @@ using Random = UnityEngine.Random;
 
 public class MonsterSpawner : MonoBehaviour
 {
+    [Header("Debuger")] 
+    public bool isOff;
+    
     public GameObject enemy;
-
+    
     //spawn limits
     private float[] spawnArea = new float[2];
     
@@ -29,10 +32,14 @@ public class MonsterSpawner : MonoBehaviour
             float randomX = Random.Range(spawnArea[0], spawnArea[1]);
             float fixedY = 0.1f;
             float randomZ = Random.Range(spawnArea[0], spawnArea[1]);
-            
-            GameObject obj = Instantiate(enemy, new Vector3(randomX, fixedY, randomZ), Quaternion.identity);
-            yield return new WaitForSeconds(1f);
+
+            if (!isOff)
+            {
+                GameObject obj = Instantiate(enemy, new Vector3(randomX, fixedY, randomZ), Quaternion.identity);
+
+            } 
+                yield return new WaitForSeconds(1f);
         }
-        yield return null;
+        //yield return null;
     }
 }

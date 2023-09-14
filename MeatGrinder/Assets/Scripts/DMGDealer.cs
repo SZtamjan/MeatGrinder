@@ -16,7 +16,7 @@ public class DMGDealer : MonoBehaviour
         if (isPlayer) pstats = GetComponent<PlayerManager>();
     }
 
-    public void DealDamage()
+    public void DealDamage(float dmg)
     {
         if (isPlayer)
         {
@@ -27,7 +27,7 @@ public class DMGDealer : MonoBehaviour
         {
             //Enemy
             //Need to see difference between different enemies
-            stats.GetDmg(40f);
+            stats.GetDmg(dmg);
         }
     }
 }

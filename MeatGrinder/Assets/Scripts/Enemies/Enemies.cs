@@ -57,7 +57,9 @@ public class Enemies : MonoBehaviour
     public void GetDmg(float dmg)
     {
         hp -= dmg;
-        print("zostało mi: " + hp);
+        
+        //print("au dostalem: " + dmg + " zostalo mi: " + hp);
+        
         if (hp <= 0f)
         {
             Destroy(gameObject);
